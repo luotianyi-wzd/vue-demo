@@ -33,12 +33,12 @@
         },
         data() {
             return {
-                // time: this.formatDate(new Date()),
+                time: this.formatDate(new Date()),
                 weather: ''
             }
         },
         mounted() {
-            // this.clock()
+            this.clock()
             this.getWeather()
         },
         computed: {
@@ -48,13 +48,6 @@
                     this.isCollapsed ? 'rotate-icon' : ''
                 ];
             },
-            time() {
-                let date = new Date()
-                let y = date.getFullYear()
-                let m = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-                let d = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-                return `${y}年${m}月${d}日`
-            }
         },
         methods: {
             collapsedSider() {

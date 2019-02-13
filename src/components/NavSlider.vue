@@ -16,46 +16,8 @@
         },
         data() {
             return {
-                lists: [
-                    {
-                        path: '/home',
-                        name: 'home',
-                        type: 'ios-navigate'
-                    },
-                    {
-                        path: '/users',
-                        name: 'users',
-                        type: 'ios-book-outline'
-                    },
-                    {
-                        path: '/about',
-                        name: 'about',
-                        type: 'ios-settings'
-                    },
-                    {
-                        path: '/echart',
-                        name: 'echart',
-                        type: 'ios-pie-outline'
-                    },
-                    {
-                        path: '/map',
-                        name: 'map',
-                        type: 'ios-paper-plane-outline'
-                    },
-                    {
-                        path: '/movie',
-                        name: 'movie',
-                        type: 'ios-camera-outline'
-                    },
-                    {
-                        path: '/picture',
-                        name: 'picture',
-                        type: 'ios-folder-open-outline'
-                    },
-                ]
+                lists: this.$router.options.routes[1].children,
             }
-        },
-        created(){
         },
         computed: {
             menuitemClasses() {
@@ -67,8 +29,6 @@
                 let path = this.$route.path.replace('/', '')
                 return path == 'page' ? 'home' : path
             },
-            handleList() {
-            }
         },
         methods: {
             jumpNav(path) {

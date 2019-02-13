@@ -16,26 +16,17 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            redirect: '/page',
-            component: getComponent('Page'),
+            redirect: '/home',
         },
         {
             path: '/',
             component: getComponent('Page'),
-
             children: [
-                {
-                    path: '/page',
-                    component: Home,
-                    name: 'home',
-                    meta: {
-                        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-                    },
-                },
                 {
                     path: '/home',
                     component: Home,
                     name: 'home',
+                    type: 'ios-navigate',
                     meta: {
                         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
                     },
@@ -43,6 +34,7 @@ const router = new Router({
                 {
                     path: '/about',
                     name: 'about',
+                    type: 'ios-book-outline',
                     // component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
                     component: getComponent('About'),
                     meta: {
@@ -52,6 +44,7 @@ const router = new Router({
                 {
                     path: '/movie',
                     name: 'movie',
+                    type: 'ios-settings',
                     // component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
                     component: getComponent('Movie'),
                     meta: {
@@ -62,6 +55,7 @@ const router = new Router({
                     path: '/echart',
                     component: Echart,
                     name: 'echart',
+                    type: 'ios-pie-outline',
                     meta: {
                         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
                     },
@@ -69,12 +63,14 @@ const router = new Router({
                 {
                     path: '/map',
                     component: Map,
-                    name: 'map'
+                    name: 'map',
+                    type: 'ios-paper-plane-outline',
                 },
                 {
                     path: '/users',
                     component: Users,
                     name: 'users',
+                    type: 'ios-camera-outline',
                     meta: {
                         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
                     },
@@ -83,6 +79,7 @@ const router = new Router({
                     path: '/picture',
                     component: Picture,
                     name: 'picture',
+                    type: 'ios-folder-open-outline',
                     meta: {
                         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
                     },

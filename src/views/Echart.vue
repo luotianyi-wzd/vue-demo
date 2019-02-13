@@ -124,7 +124,7 @@
 
                let obj = {
                    title: {
-                       text: ''
+                       text: 'echarts',
                    },
                    tooltip: {
                        trigger: 'axis',
@@ -186,7 +186,7 @@
         },
         mounted(){
           this.drawLine()
-            this.requset()
+            // this.requset()
         },
         methods:{
             drawLine() {

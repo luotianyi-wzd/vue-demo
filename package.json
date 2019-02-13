@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build --no-clean",
     "stage": "vue-cli-service build --mode stage --no-clean",
     "local": "vue-cli-service build --mode local --clean",

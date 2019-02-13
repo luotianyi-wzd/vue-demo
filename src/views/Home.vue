@@ -32,7 +32,8 @@
                     <Input type="text" v-model="formInline.name" placeholder="name" :maxlength='8'/>
                 </FormItem>
                 <FormItem prop="age" label="Age">
-                    <InputNumber :max="90" :min="16" v-model="formInline.age"  placeholder="18" :active-change="false"></InputNumber>
+                    <InputNumber :max="90" :min="16" v-model="formInline.age" placeholder="18"
+                                 :active-change="false"></InputNumber>
                 </FormItem>
                 <FormItem prop="phone" label="Phone">
                     <Input type="text" v-model="formInline.phone" placeholder="phone" :maxlength='11'>
@@ -102,8 +103,8 @@
                     name: [{required: true, message: '请输入名字', trigger: 'blur'}],
                     age: [{required: true, message: '请输入年龄'}],
                     phone: [
-                        {required: true,  message: '请输入手机号码', trigger: 'blur'},
-                        {type: 'string',pattern:/^1[34578]\d{9}$/, message:'请输入正确的手机号', trigger: 'blur'}],
+                        {required: true, message: '请输入手机号码', trigger: 'blur'},
+                        {type: 'string', pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur'}],
                     address: [{required: true, message: '请输入地址', trigger: 'blur'}],
                 },
                 hasSelect: false,
@@ -153,7 +154,7 @@
                 this.modal1 = true
             },
             //打开详情弹窗
-            handleLook(){
+            handleLook() {
                 if (!this.hasSelect) {
                     this.$Modal.warning({
                         title: '提示',
@@ -198,7 +199,7 @@
                 this.currentRow = currentRow
             },
             //获取选中行index
-            handleRowClick(row, index){
+            handleRowClick(row, index) {
                 this.rowIndex = index
             },
             //翻页
@@ -218,7 +219,8 @@
     .btn {
         margin-bottom: 40px;
     }
-    .card{
+
+    .card {
         margin: 30px 0;
         height: 200px;
     }

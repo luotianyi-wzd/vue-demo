@@ -1,22 +1,14 @@
 <template>
     <div class="movie">
-        <p>{{msg}}</p>
-        <Button @click="handleClick">点击</Button>
-        <!--<Card class="card">-->
-            <!--<div class="item" v-for="item in lists">{{item}}</div>-->
-        <!--</Card>-->
-        <TestChildren :data="count" @change="handleChange"></TestChildren>
+        <Table>
+
+        </Table>
     </div>
 </template>
 
 <script>
-    import TestChildren from './TestChildren'
-
     export default {
         name: "movie",
-        components: {
-          TestChildren
-        },
         data() {
             return {
                 lists: [
@@ -26,27 +18,8 @@
                 msg: 'father'
             }
         },
-        beforeCreate() {
-            console.log('父组件beforeCreate')
-        },
         created() {
-            console.log('父组件created')
-            // this.getData()
-        },
-        beforeMount() {
-            console.log('父组件beforeMount')
-        },
-        mounted() {
-            console.log('父组件mounted')
-        },
-        beforeDestroy() {
-            console.log('父组件beforeDestroy')
-        },
-        beforeUpdate() {
-            console.log('父组件beforeUpdate')
-        },
-        updated() {
-            console.log('父组件updated')
+          this.getData()
         },
         methods: {
             handleClick() {

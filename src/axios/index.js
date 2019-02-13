@@ -7,7 +7,7 @@ const Axios = axios.create({
     baseURL: '/',
     timeout: 10000,
     // responseType: 'json',
-    // withCredentials: true,
+    withCredentials: true,
     // headers: {
     //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     // }
@@ -16,6 +16,10 @@ const Axios = axios.create({
 // 请求前置拦截器
 Axios.interceptors.request.use(
     config => {
+        console.log(config)
+        if (config.headers['Content-Type'] == 'multipart/form-data') {
+            return config;
+        }
         if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
             // 序列化
             config.data = qs.stringify(config.data);
@@ -47,9 +51,9 @@ Axios.interceptors.response.use(
     }
 );
 
-const fetch = (url, params, method) => {
+const fetch = (url, params, method, config) => {
     return new Promise((resolve, reject) => {
-        Axios[method](url, params).then(res => {
+        Axios[method](url, params, config).then(res => {
             resolve(res)
         }).catch(err => {
             reject(err)

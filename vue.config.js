@@ -2,6 +2,7 @@
 * time 2018-12-14
 * */
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; //Webpack包文件分析器
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 let isHash
 if(process.env.VUE_APP_CURRENTMODE == 'stage' || process.env.VUE_APP_CURRENTMODE == 'local' ) {
     isHash = false
@@ -27,6 +28,12 @@ module.exports = {
         config.entry = ['babel-polyfill', './src/main.js'];
         let pluginsPro = [  //生产and测试环境
             new BundleAnalyzerPlugin(),  //	Webpack包文件分析器(https://github.com/webpack-contrib/webpack-bundle-analyzer)
+            new CompressionWebpackPlugin({
+                algorithm: 'gzip',
+                test: /\.js$|\.html$|\.css/,
+                threshold: 10240,
+                minRatio: 0.8
+            })
         ];
         let pluginsDev = [  //开发环境
             // new vConsolePlugin({  //移动端模拟开发者工具(https://github.com/diamont1001/vconsole-webpack-plugin  https://github.com/Tencent/vConsole)
@@ -41,7 +48,7 @@ module.exports = {
         }
     },
     devServer: {
-        host: '****',
+        host: '192.168.5.16',
         port: 8089,
         https: false,
         open: true, //配置自动启动浏览器
@@ -59,7 +66,7 @@ module.exports = {
                 }
             },
             '/api': {
-                target: 'http://****/',
+                target: 'http://localhost:3000/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''

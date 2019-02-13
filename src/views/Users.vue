@@ -118,7 +118,7 @@
             },
             remove (index) {
                 this.data.splice(index, 1);
-            }
+            },
         }
     }
 </script>
