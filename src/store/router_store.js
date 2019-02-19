@@ -1,11 +1,18 @@
 export default {
     state: {
-        list: []
+        list: [],
+        username: localStorage.getItem('username')
     },
     getter: {},
     mutations: {
         fillList(state, data) {
             return state.list = data
+        },
+        LOGIN_IN(state, username) {
+            return state.username = username
+        },
+        LOGIN_OUT(state) {
+            return state.username = ''
         }
     },
     actions: {

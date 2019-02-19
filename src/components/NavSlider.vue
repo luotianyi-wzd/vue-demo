@@ -44,8 +44,23 @@
     .menu-list {
         padding-top: 200px;
         height: 100vh;
+        overflow-y: scroll;
+        padding-bottom: 200px;
     }
-
+    .menu-list::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 5px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+    }
+    .menu-list::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: #535353;
+    }
+    .menu-list::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(81,90,110,1);
+        border-radius: 10px;
+        background: #515a6e;
+    }
     .menu-item span {
         display: inline-block;
         overflow: hidden;

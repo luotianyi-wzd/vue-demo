@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import router from "../router"
-import { Message } from 'iview';
+import {Message} from 'iview';
 
 const Axios = axios.create({
     baseURL: '/',
@@ -16,7 +16,6 @@ const Axios = axios.create({
 // 请求前置拦截器
 Axios.interceptors.request.use(
     config => {
-        console.log(config)
         if (config.headers['Content-Type'] == 'multipart/form-data') {
             return config;
         }
@@ -27,6 +26,7 @@ Axios.interceptors.request.use(
         return config;
     },
     error => {
+        console.log(error) // for debug
         return Promise.reject(error);
     }
 );
@@ -35,19 +35,18 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
     res => {
         if (res.status === 200) {
-            if (res.data.code == 1 || res.data.today != undefined) {
-                return res.data
-            } else if (res.data.code == 0 && res.data.msg == '请登录') {
+            if (res.data.code == 0 && res.data.msg == '请登录') {
                 router.push({path: '/login'})
                 return Promise.reject(res)
-            } else{
-                return Promise.reject(res.data)
+            } else {
+                return res.data
             }
         }
     },
     error => {
-            Message.info('出错啦，稍后重试')
-            return Promise.reject(error)
+        console.log('err' + error)// for debug
+        Message.info('出错啦，稍后重试')
+        return Promise.reject(error)
     }
 );
 

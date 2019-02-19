@@ -9,12 +9,9 @@
                     <!--<Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>-->
                     <nav-header @collapsedSider="collapsedSider" :isCollapsed="isCollapsed"></nav-header>
                 </Header>
-                <Content :style="{margin: '30px', background: '#fff', minHeight: '260px'}">
+                <Content :style="{margin: '10px', background: '#fff', minHeight: '200px'}">
                     <router-view></router-view>
                 </Content>
-                <Footer>
-                    {{time}}
-                </Footer>
             </Layout>
         </Layout>
     </div>
@@ -45,11 +42,9 @@
 
 <style scoped>
     .layout {
-        border: 1px solid #d7dde4;
         background: #f5f7f9;
         position: relative;
         border-radius: 4px;
-        overflow: hidden;
     }
 
     .layout-header-bar {

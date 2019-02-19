@@ -128,6 +128,7 @@
                         }
                     }
                 ],
+                changePic: false,
                 data: [],
                 modal2: false,
                 loading: true,
@@ -205,7 +206,9 @@
                     formData.append('name', this.formInline.name)
                     formData.append('description', this.formInline.description)
                     if (this.type == 'edit'){
-                        formData.append('picture', this.formInline.picture)
+                        if (!this.changePic) {
+                            formData.append('picture', this.formInline.picture)
+                        }
                         formData.append('id', this.formInline.id)
                     }
                     let status = this.formInline.status == true ? 1 : 0
@@ -224,10 +227,12 @@
                             this.file = ''
                         });
                         this.addIng = false
+                        this.changePic = false
                     }).catch(err => {
                         this.$Message.warning(err.msg)
                         this.addIng = false
                         this.modal2 = false
+                        this.changePic = false
                         this.$nextTick(() => {
                             this.$refs[name].resetFields();       // this.$refs.adduserform.resetFields();
                             this.file = ''
@@ -248,6 +253,7 @@
                 let windowUrl = window.URL || window.webkitURL
                 this.fileSrc = windowUrl.createObjectURL(e.target.files[0])
                 this.formInline.picture = this.fileSrc
+                this.changePic = true
                 this.$refs.formInline.validateField('picture')
                 e.target.value=""
             },

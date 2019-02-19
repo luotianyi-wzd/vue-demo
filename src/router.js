@@ -6,6 +6,7 @@ import Map from './views/Map'
 import Users from './views/Users'
 import Picture from './views/Picture'
 import Login from './views/Loign'
+import Role from './views/Role'
 // 路由懒加载
 const getComponent = (name) => () => import(`./views/${name}.vue`);
 Vue.use(Router)
@@ -84,6 +85,15 @@ const router = new Router({
                         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
                     },
                 },
+                {
+                    path: '/role',
+                    component: Role,
+                    name: 'role',
+                    type: 'ios-briefcase-outline',
+                    meta: {
+                        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+                    },
+                },
             ]
         },
         {
@@ -98,7 +108,9 @@ const router = new Router({
         }
     ]
 })
+let list = [
 
+]
 router.beforeEach((to, from, next) => {
     // 合法性校验
     if (to.meta.requireAuth) {

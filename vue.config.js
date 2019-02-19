@@ -65,6 +65,13 @@ module.exports = {
                     '^/movie': ''
                 }
             },
+            '/ticket': {
+                target: 'https://ticket-api-m.mtime.cn/movie/',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/ticket': ''
+                }
+            },
             '/api': {
                 target: 'http://localhost:3000/',
                 changeOrigin: true,

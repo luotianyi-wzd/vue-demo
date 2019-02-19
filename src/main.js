@@ -7,6 +7,8 @@ import iview from 'iview'
 import './my-theme/index.less'
 import mixin from '@/mixin'
 import fetch from '@/axios'
+import VueLazyload from './directives/lazyload'
+Vue.use(VueLazyload)
 Vue.config.productionTip = false
 Vue.use(iview)
 Vue.mixin(mixin)
