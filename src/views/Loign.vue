@@ -22,6 +22,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     export default {
         name: "loign",
         data() {
@@ -43,6 +44,8 @@
             }
         },
         methods: {
+            ...mapActions(['setRole']),
+
             login(name) {
                 this.$refs[name].validate((valid) => {
                     if (!valid) {
@@ -52,6 +55,7 @@
                     let password = this.formData.password
                     this.$fetch('/api/users/login', {username, password}, 'post').then(res => {
                         this.$Message.info(res.msg);
+                        this.setRole({role: 1})
                         window.localStorage.username = true
                         this.$router.push({path: '/'})
                     }).catch(err => {
@@ -67,7 +71,7 @@
                     let username = this.formData.user
                     let password = this.formData.password
                     this.$fetch('/api/users/register', {username, password}, 'post').then(res => {
-                        this.$Message.info(res.msg);
+                        this.$Message.info(res.msg + '，可以登录了');
                     }).catch(err => {
                         this.$Message.info(err.msg)
                     })

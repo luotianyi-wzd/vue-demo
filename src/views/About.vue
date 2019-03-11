@@ -47,6 +47,7 @@
 </template>
 <script>
     export default {
+        name: 'about',
         data() {
             return {
                 columns: [
@@ -66,7 +67,17 @@
                     },
                     {
                         title: 'Description',
-                        key: 'description'
+                        key: 'description',
+                        render: (h, params) => {
+                            return h('span', {
+                                style: {
+                                    display: 'block',
+                                    overflow:'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap'
+                                }
+                            }, params.row.description )
+                        }
                     },
                     {
                         title: 'Picture',
@@ -187,6 +198,7 @@
             remove(index) {
                 console.log(this.data[index].id)
                 this.$fetch('/api/about/deleteData', {params: {id: this.data[index].id}}, 'get').then(res => {
+                    this.current = Math.ceil(res.total/10)
                     this.getData(this.current)
                     this.$Message.success(res.msg)
                 }).catch(err => {
@@ -229,7 +241,7 @@
                         this.addIng = false
                         this.changePic = false
                     }).catch(err => {
-                        this.$Message.warning(err.msg)
+                        // this.$Message.warning(err.msg)
                         this.addIng = false
                         this.modal2 = false
                         this.changePic = false

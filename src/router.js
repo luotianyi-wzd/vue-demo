@@ -7,6 +7,7 @@ import Users from './views/Users'
 import Picture from './views/Picture'
 import Login from './views/Loign'
 import Role from './views/Role'
+import store from './store/index'
 // 路由懒加载
 const getComponent = (name) => () => import(`./views/${name}.vue`);
 Vue.use(Router)
@@ -18,6 +19,11 @@ const router = new Router({
         {
             path: '/',
             redirect: '/home',
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
         },
         {
             path: '/',
@@ -96,11 +102,7 @@ const router = new Router({
                 },
             ]
         },
-        {
-            path: '/login',
-            name: 'login',
-            component: Login
-        },
+
         {
             path: '*',
             name: 'notFound',

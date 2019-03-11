@@ -100,7 +100,6 @@
                 this.$fetch('/api/role/getRole', {params: {pageNum: current}}, 'get').then(res => {
                     console.log(res)
                     this.loading = false
-                    this.$Message.info(res.msg)
                     this.data = res.data
                     this.total = res.total
                     this.current = current

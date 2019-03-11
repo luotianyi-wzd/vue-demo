@@ -15,8 +15,9 @@
             isCollapsed: Boolean
         },
         data() {
+            console.log(this.$router.options.routes)
             return {
-                lists: this.$router.options.routes[1].children,
+                lists: this.$router.options.routes[2].children,
             }
         },
         computed: {
