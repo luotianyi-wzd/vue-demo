@@ -77,7 +77,7 @@
                                 },
                                 on: {
                                     click: () => {
-                                        this.changeRole(params.index)
+                                        this.changeRole(params.Index)
                                     }
                                 }
                             }, '修改权限')

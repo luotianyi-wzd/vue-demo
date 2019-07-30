@@ -120,7 +120,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.show('edit', params.index)
+                                            this.show('edit', params.Index)
                                         }
                                     }
                                 }, 'Edit'),
@@ -131,7 +131,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.remove(params.Index)
                                         }
                                     }
                                 }, 'Delete')

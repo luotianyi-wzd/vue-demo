@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     export default {
         name: "NavHeader",
         props: {
@@ -39,7 +40,7 @@
         },
         mounted() {
             this.clock()
-            this.getWeather()
+            // this.getWeather()
         },
         computed: {
             rotateIcon() {
@@ -50,6 +51,7 @@
             },
         },
         methods: {
+            ...mapActions(['handleLogout']),
             collapsedSider() {
                 this.$emit('collapsedSider')
             },
@@ -57,8 +59,10 @@
                 if (name == 'logout') {
                     window.localStorage.removeItem('username')
                     this.$router.push('/login')
-                    this.$fetch('/api/users/logout', {}, 'get').then(res => {
-                        this.$Message.warning(res.msg)
+                    
+                    this.handleLogout().then(res => {
+                        console.log(res)
+                        this.$Message.info(res.msg)
                     })
                 }
             },
@@ -75,7 +79,7 @@
             },
             getWeather() {
                 let self = this
-                this.$fetch('/weather', {params:{cityId: 101210101}}, 'get').then(res => {
+                this.$fetch({url: '/weather', params:{params:{cityId: 101210101}}, method: 'get'}).then(res => {
                     if (res.today.weatherStart == res.today.weatherEnd) {
                         self.weather = res.today.weatherStart
                     } else {

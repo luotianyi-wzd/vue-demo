@@ -1,15 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Echart from  './views/Echart'
-import Map from './views/Map'
-import Users from './views/Users'
-import Picture from './views/Picture'
-import Login from './views/Loign'
-import Role from './views/Role'
-import store from './store/index'
+import store from '@/store'
 // 路由懒加载
-const getComponent = (name) => () => import(`./views/${name}.vue`);
+const getComponent = (name) => () => import(`@/views/${name}.vue`)
+
 Vue.use(Router)
 
 const router = new Router({
@@ -18,20 +12,29 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            redirect: '/home',
+            redirect: '/index',
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: getComponent('Login'),
         },
         {
             path: '/',
             component: getComponent('Page'),
             children: [
                 {
+                    path: '/index',
+                    component: getComponent('Index'),
+                    name: 'index',
+                    type: 'ios-navigate',
+                    meta: {
+                        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+                    },
+                },
+                {
                     path: '/home',
-                    component: Home,
+                    component: getComponent('Home'),
                     name: 'home',
                     type: 'ios-navigate',
                     meta: {
@@ -60,7 +63,7 @@ const router = new Router({
                 },
                 {
                     path: '/echart',
-                    component: Echart,
+                    component: getComponent('Echart'),
                     name: 'echart',
                     type: 'ios-pie-outline',
                     meta: {
@@ -69,13 +72,13 @@ const router = new Router({
                 },
                 {
                     path: '/map',
-                    component: Map,
+                    component: getComponent('Map'),
                     name: 'map',
                     type: 'ios-paper-plane-outline',
                 },
                 {
                     path: '/users',
-                    component: Users,
+                    component: getComponent('Users'),
                     name: 'users',
                     type: 'ios-camera-outline',
                     meta: {
@@ -84,7 +87,7 @@ const router = new Router({
                 },
                 {
                     path: '/picture',
-                    component: Picture,
+                    component: getComponent('Picture'),
                     name: 'picture',
                     type: 'ios-folder-open-outline',
                     meta: {
@@ -93,7 +96,7 @@ const router = new Router({
                 },
                 {
                     path: '/role',
-                    component: Role,
+                    component: getComponent('Role'),
                     name: 'role',
                     type: 'ios-briefcase-outline',
                     meta: {
@@ -110,9 +113,6 @@ const router = new Router({
         }
     ]
 })
-let list = [
-
-]
 router.beforeEach((to, from, next) => {
     // 合法性校验
     if (to.meta.requireAuth) {

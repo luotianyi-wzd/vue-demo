@@ -96,8 +96,8 @@ function processRequest (request, response) {
                     var flag = false;
                     for (var file of files) {
                         //如果在目录下找到index.html，直接读取这个文件
-                        if (file === "index.html") {
-                            readFile(filePath + (filePath[filePath.length-1]=='/' ? '' : '/') + 'index.html', "text/html");
+                        if (file === "Index.vue.html") {
+                            readFile(filePath + (filePath[filePath.length-1]=='/' ? '' : '/') + 'Index.vue.html', "text/html");
                             flag = true;
                             break;
                         };

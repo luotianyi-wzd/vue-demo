@@ -92,7 +92,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.details(params.index)
+                                            this.details(params.Index)
                                         }
                                     }
                                 }, 'Details')

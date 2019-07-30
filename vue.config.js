@@ -1,8 +1,15 @@
 /*
 * time 2018-12-14
 * */
+const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; //Webpack包文件分析器
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const apiMocker = require('webpack-api-mocker')
+
+const resolve = (dir) => {
+    return path.join(__dirname, dir)
+}
+
 let isHash
 if(process.env.VUE_APP_CURRENTMODE == 'stage' || process.env.VUE_APP_CURRENTMODE == 'local' ) {
     isHash = false
@@ -10,7 +17,7 @@ if(process.env.VUE_APP_CURRENTMODE == 'stage' || process.env.VUE_APP_CURRENTMODE
     isHash = true
 }
 module.exports = {
-    baseUrl: process.env.baseUrl,
+    publicPath: process.env.baseUrl,
     productionSourceMap: false,
     filenameHashing: isHash,
     outputDir: process.env.outputDir,
@@ -26,6 +33,21 @@ module.exports = {
     configureWebpack:(config)=>{
         //入口文件
         config.entry = ['babel-polyfill', './src/main.js'];
+        //别名
+        config.resolve.alias = {
+            '@': resolve('src'),
+            '@assets': resolve('src/assets'),
+            '@layouts': resolve('src/layouts'),
+            '@pages': resolve('src/pages'),
+            '@comp': resolve('src/components'),
+            '@views': resolve('src/views'),
+            '@api': resolve('src/api'),
+            '@plug': resolve('src/plugins'),
+            '@native': resolve('src/native'),
+            '@utils': resolve('src/utils'),
+            '@styles': resolve('src/styles'),
+        }
+        
         let pluginsPro = [  //生产and测试环境
             new BundleAnalyzerPlugin(),  //	Webpack包文件分析器(https://github.com/webpack-contrib/webpack-bundle-analyzer)
             new CompressionWebpackPlugin({
@@ -48,10 +70,10 @@ module.exports = {
         }
     },
     devServer: {
-        host: '192.168.5.16',
-        port: 8089,
+        host: '192.168.0.63',
+        port: 2222,
         https: false,
-        open: true, //配置自动启动浏览器
+        open: false, //配置自动启动浏览器
         hotOnly: true, // 热更新
         proxy: {
             '/weather': {
@@ -72,13 +94,22 @@ module.exports = {
                     '^/ticket': ''
                 }
             },
-            '/api': {
+            /*'/api': {
                 target: 'http://localhost:3000/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''
                 }
-            }
+            }*/
+        },
+        before(app) {
+            apiMocker(app, path.resolve('./src/mock/index.js'), {
+                proxy: {
+                    '/repos/*': 'https://api.github.com/',
+                    '/api/*': 'https://www.baidu.com'
+                },
+                changeHost: true,
+            })
         }
     },
     lintOnSave: false,

@@ -64,7 +64,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            this.show(params.Index)
                                         }
                                     }
                                 }, 'View'),
@@ -75,7 +75,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.remove(params.Index)
                                         }
                                     }
                                 }, 'Delete')
